@@ -1,14 +1,14 @@
 <?php
-
 require_once 'Banco.php';
 require_once '../Conexao.php';
 
-class Usuario extends Banco
+class Imovel extends Banco
 {
     private $id;
-    private $login;
-    private $senha;
-    private $permissao;
+    private $descricao;
+    private $foto;
+    private $valor;
+    private $tipo;
 
     //ID
     public function getId()
@@ -21,49 +21,60 @@ class Usuario extends Banco
         $this->id = $id;
     }
 
-    //LOGIN
-    public function getLogin()
+    //Descricao
+    public function getDescricao()
     {
-        return $this->login;
+        return $this->descricao;
     }
 
-    public function setLogin($login)
+    public function setDescricao($descricao)
     {
-        $this->login = $login;
+        $this->descricao = $descricao;
     }
 
-    //SENHA
-    public function getSenha()
+    //Foto
+    public function getFoto()
     {
-        return $this->senha;
+        return $this->foto;
     }
 
-    public function setSenha($senha)
+    public function setFoto($foto)
     {
-        $this->senha = $senha;
+        $this->foto = $foto;
     }
 
-    //PERMISSAO
-    public function getPermissao()
+    //Valor
+    public function getValor()
+    {
+        return $this->valor;
+    }
+
+    public function setValor($valor)
+    {
+        $this->valor = $valor;
+    }
+
+    //Tipo
+    public function getTipo()
     {
         $retorno = "";
-        if($this->permissao == 'C')
+        if($this->tipo == 'C')
         {
-            $retorno = "Comum";
+            $retorno = "Comprar";
         }
-        else if($this->permissao == 'A')
+        else if($this->tipo == 'A')
         {
-            $retorno = "Administrador";
+            $retorno = "Alugar";
         }
         return $retorno;
     }
 
-    public function setPermissao($permissao)
+    public function setTipo($tipo)
     {
-        $this->permissao = $permissao;
+        $this->tipo = $tipo;
     }
 
-    //METÓDOS HERDADOS DA CLASSE ABSTRATA BANCO
+    //Métodos abstratos herdados da classe Banco;
 
     public function save()
     {
@@ -73,7 +84,7 @@ class Usuario extends Banco
         $conexao = new Conexao();
 
         //criar query de inserção passando os atributos que serão armazenados
-        $query = "INSERT INTO USUARIO (ID, LOGIN, SENHA, PERMISSAO) values (null,:login,:senha,:permissao)";
+        $query = "INSERT INTO IMOVEL (ID, DESCRICAO, FOTO, VALOR,TIPO) values (null,:descricao,:foto,replace(:valor,',','.'),:tipo)";
 
         //cria a conexão com o banco de dados
 
@@ -82,7 +93,7 @@ class Usuario extends Banco
             //Prepara a query para execução
             $stmt = $conn->prepare($query);
             //executa a query
-            if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao'=> $this->permissao)))
+            if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo)))
             {
                 $result = $stmt->rowCount();
             }
@@ -109,7 +120,7 @@ class Usuario extends Banco
      $conn = $conexao->getConection();
 
      //cria query da seleção
-     $query = "SELECT * FROM USUARIO";
+     $query = "SELECT * FROM IMOVEL";
     
      //prepara a query para execução
      $stmt = $conn->prepare($query);
@@ -121,7 +132,7 @@ class Usuario extends Banco
      if($stmt->execute())
      {
         //o resultado da busca será retornado como um objeto da classe 
-        while ($rs = $stmt->fetchObject(Usuario::class))
+        while ($rs = $stmt->fetchObject(Imovel::class))
         {
             //armazena esse objeto em uma posição do vetor
             $result[] = $rs;
@@ -140,6 +151,4 @@ class Usuario extends Banco
         
     }
 }
-
-    
 ?>

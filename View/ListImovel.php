@@ -1,5 +1,5 @@
 <?php
-require_once '../Controller/UsuarioController.php';
+require_once '../Controller/ImovelController.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,8 +7,8 @@ require_once '../Controller/UsuarioController.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Usuários Cadastrados</title>
-    <link rel="stylesheet" href="../wwwrot/css/ListUsuario.css">
+    <title>Imóveis Cadastrados</title>
+    <link rel="stylesheet" href="../wwwrot/css/ListImoveis.css">
     <link rel="stylesheet" href="../wwwrot/css/style.css">
 </head>
 <body>
@@ -17,22 +17,26 @@ require_once '../Controller/UsuarioController.php';
         <div class="table-container">
             <table>
                 <tr>
-                    <th>Login</th>
-                    <th>Permissão</th>
-                    <th><a href="CadUsuario.php">Novo</a></th>
+                    <th>Descrição</th>
+                    <th>Foto</th>
+                    <th>Valor</th>
+                    <th>Tipo</th>
+                    <th><a href="CadImovel.php">Novo</a></th>
                 </tr>
                 <?php
-                $usuarios = call_user_func(array('UsuarioController','listar'));
+                $imovel = call_user_func(array('ImovelController','listar'));
                 //Verifica se houve retorno
-                if(isset($usuarios))
+                if(isset($imovel))
                 {
-                    foreach($usuarios as $usuario)
+                    foreach($imovel as $imovel)
                     {
                     ?>    
                     <tr>
                         <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado. -->
-                        <td><?php echo $usuario->getLogin();?></td>
-                        <td><?php echo $usuario->getPermissao();?></td>
+                        <td><?php echo $imovel->getDescricao();?></td>
+                        <td><?php echo $imovel->getFoto();?></td>
+                        <td><?php echo $imovel->getValor();?></td>
+                        <td><?php echo $imovel->getTipo();?></td>
                         <td>
                             <a href="">Editar</a>
                             <a href="">Excluir</a>
