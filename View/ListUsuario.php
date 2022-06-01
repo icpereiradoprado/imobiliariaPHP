@@ -1,5 +1,5 @@
 <?php
-require_once '../Controller/UsuarioController.php';
+require_once 'Controller/UsuarioController.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

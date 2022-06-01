@@ -1,6 +1,6 @@
 <?php
 require_once 'Banco.php';
-require_once '../Conexao.php';
+require_once 'Conexao.php';
 
 class Imovel extends Banco
 {

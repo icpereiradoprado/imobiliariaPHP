@@ -1,5 +1,5 @@
 <?php 
-require_once '../Model/Usuario.php';
+require_once 'Model/Usuario.php';
 
 class UsuarioController
 {

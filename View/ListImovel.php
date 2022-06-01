@@ -1,5 +1,5 @@
 <?php
-require_once '../Controller/ImovelController.php';
+require_once 'Controller/ImovelController.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -1,5 +1,5 @@
 <?php 
-require_once '../Model/Imovel.php';
+require_once 'Model/Imovel.php';
 
 class ImovelController
 {

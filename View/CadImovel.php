@@ -1,5 +1,5 @@
 <?php
-require_once '../Controller/ImovelController.php';
+require_once 'Controller/ImovelController.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ require_once '../Controller/ImovelController.php';
             <form name="cadUsuario" id="cadUsuario" action="" method="POST">
                 <div class="fieldForm">
                     <label for="descricao">Descrição: </label>
-                    <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+                    <textarea name="descricao" id="descricao" cols="30" rows="4"></textarea>
                     <!-- <input type="text" name="descricao" id="descricao"> -->
                 </div>
                 <div class="fieldForm">
