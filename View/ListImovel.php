@@ -38,8 +38,8 @@ require_once 'Controller/ImovelController.php';
                         <td><?php echo $imovel->getValor();?></td>
                         <td><?php echo $imovel->getTipo();?></td>
                         <td>
-                            <a href="">Editar</a>
-                            <a href="">Excluir</a>
+                            <a href="index.php?page=imovel&action=editar&id=<?php echo $imovel->getId();?>">Editar</a>
+                            <a href="index.php?page=imovel&action=excluir&id=<?php echo $imovel->getId();?>">Excluir</a>
                         </td>
                     </tr>
                     <?php

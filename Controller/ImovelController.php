@@ -7,6 +7,7 @@ class ImovelController
     {
         $imovel = new Imovel();
 
+        $imovel->setId($_POST['id']);
         $imovel->setDescricao($_POST['descricao']);
         $imovel->setFoto($_POST['foto']);
         $imovel->setValor($_POST['valor']);
@@ -24,5 +25,21 @@ class ImovelController
 
         return $imovel->listAll();
     }
+
+    public static function editar($id)
+    {
+        $imovel = new Imovel();
+        $imovel = $imovel->find($id);
+
+        return $imovel;
+    }
+
+    public function excluir($id)
+    {
+        $imovel = new Imovel();
+
+        $imovel = $imovel->remove($id);
+    }
+
 }
 ?>

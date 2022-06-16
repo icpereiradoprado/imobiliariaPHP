@@ -18,22 +18,22 @@ require_once 'Controller/ImovelController.php';
             <form name="cadUsuario" id="cadUsuario" action="" method="POST">
                 <div class="fieldForm">
                     <label for="descricao">Descrição: </label>
-                    <textarea name="descricao" id="descricao" cols="30" rows="4"></textarea>
-                    <!-- <input type="text" name="descricao" id="descricao"> -->
+                    <textarea name="descricao" id="descricao" cols="30" rows="4" > <?php echo isset($imovel)?$imovel->getDescricao():''?></textarea>
+                    <input type="hidden" name="id" id="id" value="<?php echo isset($imovel)?$imovel->getId():'';?>">
                 </div>
                 <div class="fieldForm">
                     <label for="foto">Foto: </label>
-                    <input type="foto" name="foto" id="foto">
+                    <input type="foto" name="foto" id="foto" value="<?php echo isset($imovel)?$imovel->getFoto():''?>">
                 </div>
                 <div class="fieldForm">
-                    <label for="senha2">Valor: </label>
-                    <input type="number" name="valor" id="valor" min="0" step="0.01">
+                    <label for="valor">Valor: </label>
+                    <input type="number" name="valor" id="valor" min="0" step="0.01" value="<?php echo isset($imovel)?$imovel->getValor():''?>">
                 </div>
                 <div class="fieldForm">
                     <select name="tipo" id="tipo">
                         <option value="0" disabled>--Tipo--</option>
-                        <option value="A">Alugar</option>
-                        <option value="C">Comprar</option>
+                        <option value="A" <?php echo isset($imovel) && $imovel->getTipo() == 'Alugar'?'selected':''?>>Alugar</option>
+                        <option value="C" <?php echo isset($imovel) && $imovel->getTipo() == 'Comprar'?'selected':''?>>Comprar</option>
                     </select>
                 </div>
                 <div class="submitCenter">
@@ -51,5 +51,6 @@ require_once 'Controller/ImovelController.php';
 if(isset($_POST['btnSalvar']))
 {
     call_user_func(array('ImovelController','salvar'));
+    header('Location:index.php?page=imovel&action=listar');
 }
 ?>

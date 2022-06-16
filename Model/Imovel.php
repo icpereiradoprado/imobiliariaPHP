@@ -84,18 +84,31 @@ class Imovel extends Banco
         $conexao = new Conexao();
 
         //criar query de inserção passando os atributos que serão armazenados
-        $query = "INSERT INTO IMOVEL (ID, DESCRICAO, FOTO, VALOR,TIPO) values (null,:descricao,:foto,replace(:valor,',','.'),:tipo)";
+        
 
         //cria a conexão com o banco de dados
-
+        
         if($conn = $conexao->getConection())
         {
-            //Prepara a query para execução
-            $stmt = $conn->prepare($query);
-            //executa a query
-            if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo)))
+            if($this->id > 0)
             {
-                $result = $stmt->rowCount();
+                $query = "UPDATE IMOVEL SET DESCRICAO = :descricao, FOTO = :foto,VALOR = replace(:valor,',','.'), TIPO = :tipo WHERE id = :id";
+                $stmt = $conn->prepare($query);
+                if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo, 'id' => $this->id)))
+                {
+                    $result = $stmt->rowCount();
+                }
+            }
+            else
+            {
+                $query = "INSERT INTO IMOVEL (ID, DESCRICAO, FOTO, VALOR,TIPO) values (null,:descricao,:foto,replace(:valor,',','.'),:tipo)";
+                //Prepara a query para execução
+                $stmt = $conn->prepare($query);
+                //executa a query
+                if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo)))
+                {
+                    $result = $stmt->rowCount();
+                }
             }
         }
         return $result;
@@ -103,12 +116,39 @@ class Imovel extends Banco
 
     public function remove($id)
     {
-        
+        $result = false;
+
+        $conexao = new Conexao();
+
+        $conn = $conexao->getConection();
+
+        $query = "DELETE FROM IMOVEL WHERE ID = :id";
+
+        $stmt = $conn->prepare($query);
+
+        if($stmt->execute(array(':id'=> $id)))
+        {
+            $result = true;
+        }
+
+        return $result;
     }
 
     public function find($id)
     {
-        
+        $conexao = new Conexao();
+        $conn = $conexao->getConection();
+        $query = "SELECT * FROM imovel where id = :id";
+        $stmt = $conn->prepare($query);
+        if($stmt->execute(array(':id' => $id)))
+        {
+            $result = $stmt->fetchObject(Imovel::class);
+        }
+        else
+        {
+            $result = false;
+        }
+        return $result;
     }
 
     public function listAll()

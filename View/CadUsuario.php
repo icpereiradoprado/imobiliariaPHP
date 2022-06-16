@@ -17,21 +17,22 @@
             <form name="cadUsuario" id="cadUsuario" action="" method="POST">
                 <div class="fieldForm">
                     <label for="login">Login: </label>
-                    <input type="text" name="login" id="login">
+                    <input type="text" name="login" id="login" value="<?php echo isset($usuario)?$usuario->getLogin():''?>">
                 </div>
                 <div class="fieldForm">
                     <label for="senha1">Senha: </label>
-                    <input type="password" name="senha1" id="senha1">
+                    <input type="password" name="senha1" id="senha1" value="<?php echo isset($usuario)?$usuario->getSenha():''?>">
                 </div>
                 <div class="fieldForm">
                     <label for="senha2">Confirmar Senha: </label>
                     <input type="password" name="senha2" id="senha2">
+                    <input type="hidden" name="id" id="id" value="<?php echo isset($usuario)?$usuario->getId():'';?>"/>
                 </div>
                 <div class="fieldForm">
                     <select name="permissao" id="permissao">
                         <option value="0" disabled>--Permissão--</option>
-                        <option value="A">Administrador</option>
-                        <option value="C">Comun</option>
+                        <option value="A" <?php echo isset($usuario) && $usuario->getPermissao() == 'Administrador'?'selected':''?>>Administrador</option>
+                        <option value="C" <?php echo isset($usuario) && $usuario->getPermissao() == 'Comun'?'selected':''?>>Comun</option>
                     </select>
                 </div>
                 <div class="submitCenter">
@@ -52,5 +53,6 @@ if(isset($_POST['btnSalvar']))
 {
     //chama uma função php que permite informar a classe e método que será acionado
     call_user_func(array('UsuarioController','salvar'));
+    header('Location:index.php?page=usuario&action=listar');
 }
 ?>

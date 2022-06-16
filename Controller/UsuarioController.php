@@ -14,6 +14,7 @@ class UsuarioController
         $usuario = new Usuario();
 
         //armazena as informações do $_POST via set
+        $usuario->setId($_POST['id']);
         $usuario->setLogin($_POST['login']);
         $usuario->setSenha($_POST['senha1']);
         $usuario->setPermissao($_POST['permissao']);
@@ -31,6 +32,21 @@ class UsuarioController
         //chama o metodo listaAll()
 
         return $usuarios->listAll();
+    }
+
+    public static function editar($id)
+    {
+        $usuario = new Usuario;
+        $usuario = $usuario->find($id);
+
+        return $usuario;
+    }
+
+    public function excluir($id)
+    {
+        $usuario = new Usuario;
+
+        $usuario = $usuario->remove($id);
     }
 }
 ?>
