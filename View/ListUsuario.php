@@ -19,7 +19,7 @@ require_once 'Controller/UsuarioController.php';
                 <tr>
                     <th>Login</th>
                     <th>Permissão</th>
-                    <th><a href="CadUsuario.php">Novo</a></th>
+                    <th><a href="index.php?page=usuario">Novo</a></th>
                 </tr>
                 <?php
                 $usuarios = call_user_func(array('UsuarioController','listar'));

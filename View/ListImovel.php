@@ -21,7 +21,7 @@ require_once 'Controller/ImovelController.php';
                     <th>Foto</th>
                     <th>Valor</th>
                     <th>Tipo</th>
-                    <th><a href="CadImovel.php">Novo</a></th>
+                    <th><a href="index.php?page=imovel">Novo</a></th>
                 </tr>
                 <?php
                 $imovel = call_user_func(array('ImovelController','listar'));
