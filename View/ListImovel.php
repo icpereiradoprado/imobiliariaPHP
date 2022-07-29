@@ -34,7 +34,7 @@ require_once 'Controller/ImovelController.php';
                     <tr>
                         <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado. -->
                         <td><?php echo $imovel->getDescricao();?></td>
-                        <td><?php echo $imovel->getFoto();?></td>
+                        <td><img src="<?php echo $imovel->getFoto();?>" alt="img" width="100%"></td>
                         <td><?php echo $imovel->getValor();?></td>
                         <td><?php echo $imovel->getTipo();?></td>
                         <td>

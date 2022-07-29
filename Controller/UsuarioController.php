@@ -42,11 +42,20 @@ class UsuarioController
         return $usuario;
     }
 
-    public function excluir($id)
+    public static function excluir($id)
     {
         $usuario = new Usuario;
 
         $usuario = $usuario->remove($id);
+    }
+
+    public static function logar()
+    {
+        $usuario = new Usuario();
+        $usuario->setLogin($_POST['login']);
+        $usuario->setSenha($_POST['senha']);
+
+        return $usuario->login();
     }
 }
 ?>

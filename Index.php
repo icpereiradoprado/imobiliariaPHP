@@ -1,4 +1,5 @@
  <?php
+ session_start();
  ob_start();
  require_once 'Controller/ImovelController.php';
  require_once 'Controller/UsuarioController.php';
@@ -20,59 +21,74 @@
 </head>
 <body>
     <?php 
-        require_once 'View/PartialsViews/Nav.php';
-        if(isset($_GET['page'])){
+        // require_once 'View/PartialsViews/Nav.php';
+        if(isset($_SESSION['logado']) && $_SESSION['logado'] == true)
+        {
+            require_once 'View/PartialsViews/menu.php';
+            if(isset($_GET['page'])){
             
-            if($_GET['page'] == "imovel"){
-                if(isset($_GET['action']))
-                {
-                    if($_GET['action'] == 'editar')
+                if($_GET['page'] == "imovel"){
+                    if(isset($_GET['action']))
                     {
-                        $imovel = call_user_func(array('ImovelController','editar'),$_GET['id']);
+                        if($_GET['action'] == 'editar')
+                        {
+                            $imovel = call_user_func(array('ImovelController','editar'),$_GET['id']);
+                            require_once 'View/CadImovel.php';
+                        }
+                        if($_GET['action'] == 'excluir')
+                        {
+                            $imovel = call_user_func(array('ImovelController','excluir'),$_GET['id']);
+                            require_once 'View/ListImovel.php';
+                        }
+                        if($_GET['action']== "listar")
+                        {
+                            require_once 'View/ListImovel.php';
+                        }
+                    }
+                    else
+                    {
                         require_once 'View/CadImovel.php';
                     }
-                    if($_GET['action'] == 'excluir')
-                    {
-                        $imovel = call_user_func(array('ImovelController','excluir'),$_GET['id']);
-                        require_once 'View/ListImovel.php';
-                    }
-                    if($_GET['action']== "listar")
-                    {
-                        require_once 'View/ListImovel.php';
-                    }
                 }
-                else
-                {
-                    require_once 'View/CadImovel.php';
-                }
-            }
-            if($_GET['page'] == "usuario"){
-                if(isset($_GET['action']))
-                {
-                    if($_GET['action'] == 'editar')
+                if($_GET['page'] == "usuario"){
+                    if(isset($_GET['action']))
                     {
-                        $usuario = call_user_func(array('UsuarioController','editar'),$_GET['id']);
+                        if($_GET['action'] == 'editar')
+                        {
+                            $usuario = call_user_func(array('UsuarioController','editar'),$_GET['id']);
+                            require_once 'View/CadUsuario.php';
+                        }
+                        if($_GET['action'] == 'excluir')
+                        {
+                            $usuario = call_user_func(array('UsuarioController','excluir'),$_GET['id']);
+                            require_once 'View/ListUsuario.php';
+                        }
+                        if($_GET['action'] == "listar")
+                        {
+                            require_once 'View/ListUsuario.php';
+                        }
+                    }
+                    else
+                    {
                         require_once 'View/CadUsuario.php';
                     }
-                    if($_GET['action'] == 'excluir')
-                    {
-                        $usuario = call_user_func(array('UsuarioController','excluir'),$_GET['id']);
-                        require_once 'View/ListUsuario.php';
-                    }
-                    if($_GET['action']== "listar")
-                    {
-                        require_once 'View/ListUsuario.php';
-                    }
                 }
-                else
-                {
-                    require_once 'View/CadUsuario.php';
-                }
+            }
+            else
+            {
+                require_once 'View/PartialsViews/CardImoveis.php';
             }
         }
         else
         {
-            require_once 'View/PartialsViews/CardImoveis.php';
+            if(isset($_GET['logar']))
+            {
+                require_once 'View/login.php';
+            }
+            else
+            {
+                require_once 'principal.php';
+            }
         }
         
         ob_end_flush();
