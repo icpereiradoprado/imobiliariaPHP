@@ -28,3 +28,12 @@ input[type=submit] {
     display: flex;
     justify-content: center;
 }
+#cadastrar{
+    margin-top: 20px;
+}
+#cadastrar > a{
+    cursor: pointer;
+    /* text-decoration: none; */
+    color: orangered;
+    font-weight: 500;
+}

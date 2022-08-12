@@ -27,6 +27,7 @@
                     <label for="senha2">Confirmar Senha: </label>
                     <input type="password" name="senha2" id="senha2">
                     <input type="hidden" name="id" id="id" value="<?php echo isset($usuario)?$usuario->getId():'';?>"/>
+                    <input type="hidden" name="primeiroUsuario" id="primeiroUsuario" value="<?php echo $_GET['page'] == 'cadastro'? 1 :'';?>"/>
                 </div>
                 <div class="fieldForm">
                     <select name="permissao" id="permissao">
@@ -53,6 +54,13 @@ if(isset($_POST['btnSalvar']))
 {
     //chama uma função php que permite informar a classe e método que será acionado
     call_user_func(array('UsuarioController','salvar'));
-    header('Location:index.php?page=usuario&action=listar');
+    if($_POST['primeiroUsuario'] == 1)
+    {
+        header('Location:Index.php?logar');
+    }
+    else
+    {
+        header('Location:index.php?page=usuario&action=listar');
+    }
 }
 ?>

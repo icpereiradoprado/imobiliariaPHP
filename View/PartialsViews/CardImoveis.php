@@ -5,7 +5,7 @@ require_once 'Controller/ImovelController.php';
     <div class="container">
         <div class="row d-flex">    
                 <?php 
-                $imoveis = call_user_func(array('ImovelController','listar'));
+                $imoveis = call_user_func(array('ImovelController','listarUltimosImoveis'));
                 foreach($imoveis as $imovel)
                 {
                 ?>

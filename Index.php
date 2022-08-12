@@ -22,7 +22,7 @@
 <body>
     <?php 
         // require_once 'View/PartialsViews/Nav.php';
-        if(isset($_SESSION['logado']) && $_SESSION['logado'] == true)
+        if(isset($_SESSION['logado']) && $_SESSION['logado'])
         {
             require_once 'View/PartialsViews/menu.php';
             if(isset($_GET['page'])){
@@ -84,6 +84,10 @@
             if(isset($_GET['logar']))
             {
                 require_once 'View/login.php';
+            }
+            else if(isset($_GET['page']) == "cadastro")
+            {
+                require_once 'View/CadUsuario.php';
             }
             else
             {

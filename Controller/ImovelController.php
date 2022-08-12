@@ -26,6 +26,17 @@ class ImovelController
         return $imovel->listAll();
     }
 
+    public static function listarUltimosImoveis()
+    {
+        //cria um objeto do tipo usuario
+        $imovel = new Imovel();
+
+        //chama o metodo listaAll()
+
+        return $imovel->listLastImoveis();
+    }
+
+
     public static function editar($id)
     {
         $imovel = new Imovel();

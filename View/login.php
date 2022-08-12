@@ -5,6 +5,7 @@
             <input type="text" name="login" id="login" class="my-3 " placeholder = "Login...">
             <input type="password" name="senha" id="senha" class="my-3" placeholder = "Senha...">
             <input type="submit" value="Logar" name="btnLogar" id="btnLogar">
+            <span id="cadastrar">Não tem uma conta? <a href="Index.php?page=cadastro">Cadastre-se</a></span>
         </div>
     </form>
 </div>
@@ -15,6 +16,6 @@ if(isset($_POST["btnLogar"]))
     $_SESSION['logado'] = call_user_func(array('UsuarioController','logar'));
     $_SESSION['login'] = $_POST['login'];
 
-    header('Location: index.php');
+    header('Location: Index.php');
 }
 ?>
