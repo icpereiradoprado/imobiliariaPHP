@@ -11,7 +11,7 @@ require_once 'Controller/ImovelController.php';
                 ?>
                 <div class="col-sm-4">
                     <div class="card mt-5 mb-5 text-center card-size">
-                        <img  class="img-thumbnail" src="data:<?php echo $imovel->getFotoTipo();?>;base64,<?php echo base64_encode($imovel->getFoto());?>" alt="preview da imagem da casa">
+                        <img  class="card-img-top" style="height: 50%;" src="<?php echo $imovel->getPath();?>" alt="preview da imagem da casa">
                         <div class="card-body">
                             <h5 class="card-title">Imóvel</h5>
                             <p class="card-text text-start"><?php echo $imovel->getDescricao(); ?></p>

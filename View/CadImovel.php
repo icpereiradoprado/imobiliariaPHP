@@ -29,7 +29,7 @@ require_once 'Controller/ImovelController.php';
                     if(isset($imovel) && !empty($imovel->getFoto())){
                 ?>
                 <div class="imgPreview">
-                    <img  class="img-thumbnail" src="data:<?php echo $imovel->getFotoTipo();?>;base64,<?php echo base64_encode($imovel->getFoto());?>" alt="preview da imagem da casa">
+                    <img  class="img-thumbnail" src="<?php echo $imovel->getPath();?>" alt="preview da imagem da casa">
                 </div>
                 <?php 
                     }

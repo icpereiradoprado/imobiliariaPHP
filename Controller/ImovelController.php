@@ -13,6 +13,9 @@ class ImovelController
         if(is_uploaded_file($_FILES['foto']['tmp_name'])){
             $imagem['data'] = file_get_contents($_FILES['foto']['tmp_name']);
             $imagem['tipo'] = $_FILES['foto']['type'];
+            $imagem['path'] = 'wwwroot/images/'.$_FILES['foto']['name'];
+            //upload do arquivo para o servidor.
+            move_uploaded_file($_FILES['foto']['tmp_name'],$imagem['path']);
         }
 
         if(!empty($imagem)){
@@ -20,10 +23,15 @@ class ImovelController
             // exit();
             $imovel->setFoto($imagem['data']);
             $imovel->setFotoTipo($imagem['tipo']);
+            $imovel->setPath($imagem['path']);
+            //Verifica se existe um caminho da imagem e se sim remove a imagem antiga do servidor
+            if(!empty($_POST['path']))
+                unlink($_POST['path']);
         }
         else{
             $imovel->setFoto($fotoAtual);
             $imovel->setFotoTipo($fotoTipo);
+            $imovel->setPath($_POST['path']);
         }
 
         $imovel->setId($_POST['id']);
