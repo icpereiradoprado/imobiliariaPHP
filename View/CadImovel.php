@@ -13,9 +13,9 @@ require_once 'Controller/ImovelController.php';
     <link rel="stylesheet" href="../wwwrot/css/CadImovel.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 5%;">
     <div class="formBorder">
-            <form name="cadUsuario" id="cadUsuario" action="" method="POST">
+            <form name="cadUsuario" id="cadUsuario" action="" method="POST" enctype="multipart/form-data">
                 <div class="fieldForm">
                     <label for="descricao">Descrição: </label>
                     <textarea name="descricao" id="descricao" cols="30" rows="4" > <?php echo isset($imovel)?$imovel->getDescricao():''?></textarea>
@@ -23,8 +23,17 @@ require_once 'Controller/ImovelController.php';
                 </div>
                 <div class="fieldForm">
                     <label for="foto">Foto: </label>
-                    <input type="foto" name="foto" id="foto" value="<?php echo isset($imovel)?$imovel->getFoto():''?>">
+                    <input type="file" name="foto" id="foto">
                 </div>
+                <?php 
+                    if(isset($imovel) && !empty($imovel->getFoto())){
+                ?>
+                <div class="imgPreview">
+                    <img  class="img-thumbnail" src="data:<?php echo $imovel->getFotoTipo();?>;base64,<?php echo base64_encode($imovel->getFoto());?>" alt="preview da imagem da casa">
+                </div>
+                <?php 
+                    }
+                ?>
                 <div class="fieldForm">
                     <label for="valor">Valor: </label>
                     <input type="number" name="valor" id="valor" min="0" step="0.01" value="<?php echo isset($imovel)?$imovel->getValor():''?>">
@@ -50,7 +59,12 @@ require_once 'Controller/ImovelController.php';
 <?php
 if(isset($_POST['btnSalvar']))
 {
-    call_user_func(array('ImovelController','salvar'));
+    if(isset($imovel)){
+        call_user_func(array('ImovelController','salvar'),$imovel->getFoto(),$imovel->getFotoTipo());
+    }
+    else{
+        call_user_func(array('ImovelController','salvar'));
+    }
     header('Location:index.php?page=imovel&action=listar');
 }
 ?>

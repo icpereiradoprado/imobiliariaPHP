@@ -50,3 +50,8 @@ input[type=submit] {
 .btn-size{
     width: 100px;
 }
+
+
+.imgPreview{
+    width: 20%;
+}

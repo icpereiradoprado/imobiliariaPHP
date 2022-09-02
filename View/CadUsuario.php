@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../wwwrot/css/CadUser.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 5%;">
         <div class="formBorder">
             <form name="cadUsuario" id="cadUsuario" action="" method="POST">
                 <div class="fieldForm">

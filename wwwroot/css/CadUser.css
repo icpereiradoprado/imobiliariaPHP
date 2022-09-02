@@ -29,11 +29,20 @@ input[type=submit] {
     justify-content: center;
 }
 #cadastrar{
+    text-align: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 #cadastrar > a{
     cursor: pointer;
     /* text-decoration: none; */
     color: orangered;
     font-weight: 500;
+}
+
+.background-login{
+    border: 1px solid gray;
+    width: 20%;
+    padding: 0 2% 0 2%;
+    border-radius: 8px;
 }

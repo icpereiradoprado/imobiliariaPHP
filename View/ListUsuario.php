@@ -13,7 +13,7 @@ require_once 'Controller/UsuarioController.php';
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" style="margin-top: 5%;">
         <div class="table-container">
             <table>
                 <tr>
