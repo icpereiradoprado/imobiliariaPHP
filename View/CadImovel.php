@@ -18,12 +18,12 @@ require_once 'Controller/ImovelController.php';
             <form name="cadUsuario" id="cadUsuario" action="" method="POST" enctype="multipart/form-data">
                 <div class="fieldForm">
                     <label for="descricao">Descrição: </label>
-                    <textarea name="descricao" id="descricao" cols="30" rows="4" > <?php echo isset($imovel)?$imovel->getDescricao():''?></textarea>
-                    <input type="hidden" name="id" id="id" value="<?php echo isset($imovel)?$imovel->getId():'';?>">
+                    <textarea name="descricao" id="descricao" cols="30" rows="4" required> <?php echo isset($imovel)?$imovel->getDescricao():''?></textarea>
+                    <!-- <input type="hidden" name="id" id="id" value="<?php echo isset($imovel)?$imovel->getId():'';?>"> -->
                 </div>
                 <div class="fieldForm">
-                    <label for="foto">Foto: </label>
-                    <input type="file" name="foto" id="foto">
+                    <label for="foto">Foto Thumbnail: </label>
+                    <input type="file" name="foto" id="foto" required>
                 </div>
                 <?php 
                     if(isset($imovel) && !empty($imovel->getFoto())){
@@ -36,10 +36,10 @@ require_once 'Controller/ImovelController.php';
                 ?>
                 <div class="fieldForm">
                     <label for="valor">Valor: </label>
-                    <input type="number" name="valor" id="valor" min="0" step="0.01" value="<?php echo isset($imovel)?$imovel->getValor():''?>">
+                    <input type="number" name="valor" id="valor" min="0" step="0.01" required value="<?php echo isset($imovel)?$imovel->getValor():''?>">
                 </div>
                 <div class="fieldForm">
-                    <select name="tipo" id="tipo">
+                    <select name="tipo" id="tipo" required>
                         <option value="0" disabled>--Tipo--</option>
                         <option value="A" <?php echo isset($imovel) && $imovel->getTipo() == 'Alugar'?'selected':''?>>Alugar</option>
                         <option value="C" <?php echo isset($imovel) && $imovel->getTipo() == 'Comprar'?'selected':''?>>Comprar</option>
@@ -47,12 +47,15 @@ require_once 'Controller/ImovelController.php';
                 </div>
                 <div class="submitCenter">
                     <div class="fieldForm">
+                        <input type="hidden" name="id" id="id" value="<?php echo isset($imovel)?$imovel->getId():''; ?>" />
+                        <input type="hidden" name="path" id="path" value="<?php echo isset($imovel)?$imovel->getPath():''; ?>" />
                         <input type="submit" name="btnSalvar" id="btnSalvar">
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
 </body>
 </html>
 

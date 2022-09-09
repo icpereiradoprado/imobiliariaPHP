@@ -1,6 +1,7 @@
 <?php
 require_once 'Banco.php';
 require_once 'Conexao.php';
+require_once 'Galeria.php';
 
 class Imovel extends Banco
 {
@@ -11,6 +12,11 @@ class Imovel extends Banco
     private $tipo;
     private $fotoTipo;
     private $path;
+    private $galeria;
+
+    public function __construct() {
+        $this->galeria = new Galeria();
+    }
 
     //ID
     public function getId()

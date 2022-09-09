@@ -40,6 +40,7 @@ require_once 'Controller/ImovelController.php';
                         <td>
                             <a href="index.php?page=imovel&action=editar&id=<?php echo $imovel->getId();?>">Editar</a>
                             <a href="index.php?page=imovel&action=excluir&id=<?php echo $imovel->getId();?>">Excluir</a>
+                            <a href="index.php?page=imovel&action=adicionar-foto&id=<?php echo $imovel->getId();?>">Adicionar fotos</a>
                         </td>
                     </tr>
                     <?php

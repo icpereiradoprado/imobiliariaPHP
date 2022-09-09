@@ -56,3 +56,11 @@ input[type=submit] {
 .imgPreview{
     width: 20%;
 }
+
+.add-pictures{
+    width: 100px;
+    border: 1px solid orangered;
+    color: orangered;
+    border-radius: 8px;
+    background-color: white;
+}

@@ -44,6 +44,10 @@
                         {
                             require_once 'View/ListImovel.php';
                         }
+                        if($_GET['action'] == "adicionar-foto")
+                        {
+                            require_once 'View/CadPictures.php';
+                        }
                     }
                     else
                     {
