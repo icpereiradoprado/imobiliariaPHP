@@ -7,6 +7,8 @@ class Galeria extends Banco
     private $id_picture;
     private $id_imovel;
     private $picture;
+    private $pictureTipo;
+    private $path;
 
 
     function getPicture(){
@@ -16,6 +18,28 @@ class Galeria extends Banco
     function setPicture($picture){
         $this->picture = $picture;
     }
+
+    function getPictureTipo(){
+        return $this->picture;
+    }
+
+    function setPictureTipo($pictureTipo){
+        $this->pictureTipo = $pictureTipo;
+    }
+
+    function getPath(){
+        return $this->path;
+    }
+
+    function setPath($path){
+        $this->path = $path;
+    }
+
+    function setIdImovel($id){
+        $this->id_imovel = $id;
+    }
+
+    
     
 
     public function save()
@@ -32,24 +56,14 @@ class Galeria extends Banco
         
         if($conn = $conexao->getConection())
         {
-            if($this->id > 0)
+            
+            $query = "INSERT INTO GALERIA (ID_PICTURE, PICTURE, ID_IMOVEL, PICTURE_TIPO, PATHADD) VALUES (NULL, :picture, :id_imovel, :pictureTipo, :pathadd)";
+            $stmt = $conn->prepare($query);
+            if($stmt->execute(array(':picture' => $this->picture, ':id_imovel' => $this->id_imovel, ':pictureTipo' => $this->pictureTipo, ':pathadd' => $this->path)))
             {
-                $query = "UPDATE GALERIA SET PICTURE = :picture, ID_IMOVEL = :id_movel WHERE id = :id";
-                $stmt = $conn->prepare($query);
-                if($stmt->execute(array(':picture' => $this->picture, ':id_movel' => $this->id_movel)))
-                {
-                    $result = $stmt->rowCount();
-                }
+                $result = $stmt->rowCount();
             }
-            else
-            {
-                $query = "INSERT INTO GALERIA (ID_PICTURE, PICTURE, ID_IMOVEL) VALUES (NULL, :picture, :id_movel)";
-                $stmt = $conn->prepare($query);
-                if($stmt->execute(array(':picture' => $this->picture, ':id_imovel' => $this->id_imovel)))
-                {
-                    $result = $stmt->rowCount();
-                }
-            }
+            
         }
         return $result;
     }
@@ -79,9 +93,44 @@ class Galeria extends Banco
     
     }
 
+    public function listAllPictures($idSelectedImovel)
+    {
+        //cria um objeto do tipo conexao
+        $conexao = new Conexao();
+        
+        //cria a conexao com o banco de dados
+        $conn = $conexao->getConection();
+
+        //cria query da seleção
+        $query = "SELECT PATHADD FROM GALERIA WHERE ID_IMOVEL = :id_imovel";
+        
+        //prepara a query para execução
+        $stmt = $conn->prepare($query);
+
+        //Cria um array para receber o resultado da seleção
+        $result = array();
+
+        //executa a query
+        if($stmt->execute(array(':id_imovel' => $idSelectedImovel)))
+        {
+            //o resultado da busca será retornado como um objeto da classe 
+            while ($rs = $stmt->fetchObject(Galeria::class))
+            {
+                //armazena esse objeto em uma posição do vetor
+                $result[] = $rs;
+            }
+        }
+        else
+        {
+            $result = false;
+        }
+
+        return $result;
+    }
+
     public function listAll()
     {
-     
+        
     }
 
     public function listLastImoveis()
