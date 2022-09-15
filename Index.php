@@ -3,6 +3,7 @@
  ob_start();
  require_once 'Controller/ImovelController.php';
  require_once 'Controller/UsuarioController.php';
+ require_once 'Controller/GaleriaController.php';
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +47,11 @@
                         }
                         if($_GET['action'] == "adicionar-foto")
                         {
+                            require_once 'View/CadPictures.php';
+                        }
+                        if($_GET['action'] == 'excluir-foto')
+                        {
+                            $imovel = call_user_func(array('GaleriaController','excluir'),$_GET['id-foto']);
                             require_once 'View/CadPictures.php';
                         }
                     }

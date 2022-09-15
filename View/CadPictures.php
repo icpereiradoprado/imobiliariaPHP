@@ -30,18 +30,20 @@
         <div style="width: 100%; height: 1px; border: 1px solid orangered"></div>
     </div>
     
-    <div class="d-flex flex-wrap justify-content-between" style="margin-top: 25px;">
+    <div class="d-flex flex-wrap justify-content-center" style="margin: auto;">
     
         <?php 
             $galeriaPictures = call_user_func(array('GaleriaController','listarPictures'));
             foreach($galeriaPictures as $picture)
             {
             ?>
-            <div class="col-sm-4">
-                <div class="card mt-5 mb-5 text-center card-size">
-                    <img  class="card-img-top" style="height: 50%;" src="<?php echo $picture->getPath();?>" alt="imagem da casa">
-                    <?php echo $picture->getPath();?>
+
+            <div class="d-flex flex-column">
+                <div class="" style="width: 500px; height: 330px; margin-bottom: 5px; margin-right: 20px;">
+                    <img class="w-100 h-100 img-thumbnail" src="<?php echo $picture->getPath();?>" alt="imagem da casa">
+                
                 </div>
+                <a href="?page=imovel&action=excluir-foto&id-foto=<?php echo $picture->getId();?>&id=<?php echo $picture->getIdImovel();?>" name="btnExcluir" id="btnExcluir" class="btnExcluir my-3" style="width: 65px;">Excluir</a>
             </div>
             <?php
             }
@@ -55,11 +57,12 @@
 if(isset($_POST['btnSalvar']))
 {
     if(isset($galeria)){
-        call_user_func(array('GaleriaController','salvar'),$galeria->getPicture(),$galeria->getPictureTipo());
+        call_user_func(array('GaleriaController','salvar'));
     }
     else{
         call_user_func(array('GaleriaController','salvar'));
     }
     // header('Location:index.php?page=imovel&action=listar');
 }
+
 ?>

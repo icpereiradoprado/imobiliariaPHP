@@ -6,25 +6,14 @@ class Galeria extends Banco
 {
     private $id_picture;
     private $id_imovel;
-    private $picture;
-    private $pictureTipo;
     private $path;
 
-
-    function getPicture(){
+    function getIdPicture(){
         return $this->picture;
     }
 
-    function setPicture($picture){
-        $this->picture = $picture;
-    }
-
-    function getPictureTipo(){
-        return $this->picture;
-    }
-
-    function setPictureTipo($pictureTipo){
-        $this->pictureTipo = $pictureTipo;
+    function setIdPicture($id){
+        $this->id_picture = $id;
     }
 
     function getPath(){
@@ -35,10 +24,17 @@ class Galeria extends Banco
         $this->path = $path;
     }
 
+    function getIdImovel(){
+        return $this->id_imovel;
+    }
+
     function setIdImovel($id){
         $this->id_imovel = $id;
     }
 
+    function getId(){
+        return $this->id_picture;
+    }
     
     
 
@@ -53,13 +49,11 @@ class Galeria extends Banco
         
 
         //cria a conexão com o banco de dados
-        
         if($conn = $conexao->getConection())
         {
-            
-            $query = "INSERT INTO GALERIA (ID_PICTURE, PICTURE, ID_IMOVEL, PICTURE_TIPO, PATHADD) VALUES (NULL, :picture, :id_imovel, :pictureTipo, :pathadd)";
+            $query = "INSERT INTO GALERIA (ID_PICTURE, ID_IMOVEL, path) VALUES (NULL, :id_imovel, :path)";
             $stmt = $conn->prepare($query);
-            if($stmt->execute(array(':picture' => $this->picture, ':id_imovel' => $this->id_imovel, ':pictureTipo' => $this->pictureTipo, ':pathadd' => $this->path)))
+            if($stmt->execute(array(':id_imovel' => $this->id_imovel, ':path' => $this->path)))
             {
                 $result = $stmt->rowCount();
             }
@@ -76,11 +70,11 @@ class Galeria extends Banco
 
         $conn = $conexao->getConection();
 
-        $query = "DELETE FROM GALERIA WHERE ID_PICTURE = :id";
+        $query = "DELETE FROM galeria WHERE ID_PICTURE = :id";
 
         $stmt = $conn->prepare($query);
 
-        if($stmt->execute(array(':id'=> $id_picture)))
+        if($stmt->execute(array(':id'=> $id)))
         {
             $result = true;
         }
@@ -102,7 +96,7 @@ class Galeria extends Banco
         $conn = $conexao->getConection();
 
         //cria query da seleção
-        $query = "SELECT PATHADD FROM GALERIA WHERE ID_IMOVEL = :id_imovel";
+        $query = "SELECT * FROM GALERIA WHERE ID_IMOVEL = :id_imovel";
         
         //prepara a query para execução
         $stmt = $conn->prepare($query);
@@ -114,8 +108,9 @@ class Galeria extends Banco
         if($stmt->execute(array(':id_imovel' => $idSelectedImovel)))
         {
             //o resultado da busca será retornado como um objeto da classe 
-            while ($rs = $stmt->fetchObject(Galeria::class))
+           while ($rs = $stmt->fetchObject(Galeria::class))
             {
+                //print_r($rs);
                 //armazena esse objeto em uma posição do vetor
                 $result[] = $rs;
             }
