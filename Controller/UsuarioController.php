@@ -57,5 +57,6 @@ class UsuarioController
 
         return $usuario->login();
     }
+
 }
 ?>

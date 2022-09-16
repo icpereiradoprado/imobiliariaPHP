@@ -1,5 +1,6 @@
 <?php
     require_once 'Controller/UsuarioController.php';
+    require_once 'View/PartialsViews/NavPrincipal.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,11 +31,22 @@
                     <input type="hidden" name="primeiroUsuario" id="primeiroUsuario" value="<?php echo $_GET['page'] == 'cadastro'? 1 :'';?>"/>
                 </div>
                 <div class="fieldForm">
+                    <?php
+                        if(isset($_SESSION['logado']) && $_SESSION['logado'] == "Administrador"){
+                    ?>
                     <select name="permissao" id="permissao">
                         <option value="0" disabled>--Permissão--</option>
                         <option value="A" <?php echo isset($usuario) && $usuario->getPermissao() == 'Administrador'?'selected':''?>>Administrador</option>
                         <option value="C" <?php echo isset($usuario) && $usuario->getPermissao() == 'Comun'?'selected':''?>>Comun</option>
                     </select>
+                    <?php
+                        }else{
+                    ?>
+                            <input type="hidden" name="permissao" id="permissao" value="C">
+                    <?php
+                        }
+                    ?>
+                    
                 </div>
                 <div class="submitCenter">
                     <div class="fieldForm">

@@ -23,7 +23,7 @@
 <body>
     <?php 
         // require_once 'View/PartialsViews/Nav.php';
-        if(isset($_SESSION['logado']) && $_SESSION['logado'])
+        if(isset($_SESSION['logado']) && isset($_SESSION['login']) && !empty($_SESSION['logado']) && !empty($_SESSION['login']))
         {
             require_once 'View/PartialsViews/menu.php';
             if(isset($_GET['page'])){
@@ -83,6 +83,9 @@
                         require_once 'View/CadUsuario.php';
                     }
                 }
+                // if($_GET['page'] == "galeria"){
+                //     if()
+                // }
             }
             else
             {

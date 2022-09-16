@@ -175,22 +175,49 @@ class Usuario extends Banco
         
     }
 
+    // public function login()
+    // {
+    //     $conexao = new Conexao();
+
+    //     $conn = $conexao->getConection();
+
+    //     $query = "SELECT * FROM USUARIO WHERE LOGIN = :login AND SENHA = :senha";
+
+    //     $stmt = $conn->prepare($query);
+
+    //     if($stmt->execute(array(':login'=> $this->login, ':senha'=> $this->senha)))
+    //     {
+    //         $result = false;
+    //         if($stmt->rowCount() > 0)
+    //         {
+    //             $result = true;
+    //         }
+    //     }
+    //     return $result;
+    // }
+
     public function login()
     {
         $conexao = new Conexao();
 
         $conn = $conexao->getConection();
 
-        $query = "SELECT * FROM USUARIO WHERE LOGIN = :login AND SENHA = :senha";
+        $query = "SELECT permissao FROM USUARIO WHERE LOGIN = :login AND SENHA = :senha";
 
         $stmt = $conn->prepare($query);
 
+        $result = "";
+
         if($stmt->execute(array(':login'=> $this->login, ':senha'=> $this->senha)))
         {
-            $result = false;
-            if($stmt->rowCount() > 0)
+            while ($rs = $stmt->fetchObject(Usuario::class))
             {
-                $result = true;
+                print_r($rs);
+                //exit();
+                //armazena esse objeto em uma posição do vetor
+                $result = $rs->getPermissao();
+                print_r($result);
+                //exit();
             }
         }
         return $result;

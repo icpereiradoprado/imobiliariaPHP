@@ -1,7 +1,22 @@
 <?php
+    ob_start();
     require_once 'Controller/GaleriaController.php';
 ?>
 <!DOCTYPE html>
+<?php
+if(isset($_POST['btnSalvar']))
+{
+    if(isset($galeria)){
+        call_user_func(array('GaleriaController','salvar'));
+    }
+    else{
+        call_user_func(array('GaleriaController','salvar'));
+    }
+    // header('Location:index.php?page=imovel&action=listar');
+}
+
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,16 +68,8 @@
 </body>
 </html>
 
-<?php
-if(isset($_POST['btnSalvar']))
-{
-    if(isset($galeria)){
-        call_user_func(array('GaleriaController','salvar'));
-    }
-    else{
-        call_user_func(array('GaleriaController','salvar'));
-    }
-    // header('Location:index.php?page=imovel&action=listar');
-}
 
+
+<?php 
+ob_end_flush();
 ?>
