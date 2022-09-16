@@ -123,6 +123,42 @@ class Galeria extends Banco
         return $result;
     }
 
+    public function listAllPicturesTipo($idSelectedImovel = null)
+    {
+        //cria um objeto do tipo conexao
+        $conexao = new Conexao();
+        
+        //cria a conexao com o banco de dados
+        $conn = $conexao->getConection();
+        
+        //cria query da seleção
+        $query = "SELECT * FROM GALERIA WHERE ID_IMOVEL = :id_imovel";
+        
+        //prepara a query para execução
+        $stmt = $conn->prepare($query);
+
+        //Cria um array para receber o resultado da seleção
+        $result = array();
+
+        //executa a query
+        if($stmt->execute(array(':id_imovel' => $idSelectedImovel)))
+        {
+            //o resultado da busca será retornado como um objeto da classe 
+           while ($rs = $stmt->fetchObject(Galeria::class))
+            {
+                //print_r($rs);
+                //armazena esse objeto em uma posição do vetor
+                $result[] = $rs;
+            }
+        }
+        else
+        {
+            $result = false;
+        }
+
+        return $result;
+    }
+
     public function listAll()
     {
         

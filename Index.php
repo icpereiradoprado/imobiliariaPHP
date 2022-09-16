@@ -83,9 +83,18 @@
                         require_once 'View/CadUsuario.php';
                     }
                 }
-                // if($_GET['page'] == "galeria"){
-                //     if()
-                // }
+                if($_GET['page'] == "galeria"){
+                    if($_GET['action'] == "comprar")
+                    {
+                        // $usuario = call_user_func(array('UsuarioController','editar'),$_GET['id']);
+                        // require_once 'View/CadUsuario.php';
+                    }
+                    if($_GET['action'] == "alugar")
+                    {
+                        // $usuario = call_user_func(array('UsuarioController','editar'),$_GET['id']);
+                        // require_once 'View/CadUsuario.php';
+                    }
+                }
             }
             else
             {

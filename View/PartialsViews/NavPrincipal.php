@@ -10,10 +10,10 @@
                 <a class="nav-link active" aria-current="page" href="Index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Index.php?page=imovel&action=listar">Alugar</a>
+                <a class="nav-link" href="Index.php?page=galeria&action=alugar">Alugar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Index.php?page=usuario&action=listar">Comprar</a>
+                <a class="nav-link" href="Index.php?page=galeria&action=comprar">Comprar</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Index.php?page=cadastro">Cadastrar-se</a>

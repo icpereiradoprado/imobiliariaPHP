@@ -18,7 +18,7 @@ require_once 'Controller/ImovelController.php';
                             
                         </div>
                         <div class="mb-3">
-                            <a href="#" class="btn btn-primary"><?php echo $imovel->getTipo()?></a>
+                            <a href="?page=galeria&action=<?php echo $imovel->getTipo() == "Alugar" ? "alugar" : "comprar";?>&id=<?php echo $imovel->getId();?>" class="btn btn-primary"><?php echo $imovel->getTipo()?></a>
                         </div>
                     </div>
                 </div>
