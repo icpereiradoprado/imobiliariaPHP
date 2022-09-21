@@ -116,7 +116,6 @@
                 require_once 'principal.php';
             }
         }
-        
         ob_end_flush();
     ?>
 </body>

@@ -20,6 +20,6 @@ if(isset($_POST["btnLogar"]))
     $_SESSION['logado'] = call_user_func(array('UsuarioController','logar'));
     $_SESSION['login'] = $_POST['login'];
 
-    header('Location: Index.php');
+    header('Location: index.php');
 }
 ?>

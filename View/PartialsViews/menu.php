@@ -37,8 +37,10 @@ if($_SESSION['logado'] == "Administrador")
 </nav>
 <?php
 }else if($_SESSION['logado'] == "Comum"){
-
+  
 ?>
+
+<?php require_once 'JumbotronPrincipal.php'; ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Logo</a>
